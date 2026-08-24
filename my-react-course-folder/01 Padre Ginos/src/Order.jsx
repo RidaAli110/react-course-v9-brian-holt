@@ -11,14 +11,15 @@ export default function Order() {
   const [PizzaTypes, SetPizzaTypes] = useState([]);
 
   // These are the default sates
-  const [PizzaType, SetPizzaType] = useState("Pepperoni");
+  const [PizzaType, SetPizzaType] = useState("");
   const [PizzaSize, SetPizzaSize] = useState("M");
   const [loading, SetLoading] = useState(true);
 
   let price, selectedPizza;
 
   if (!loading) {
-    selectedPizza = PizzaTypes.find((pizza) => pizza.id);
+    selectedPizza = PizzaTypes.find((pizza) => pizza.id === PizzaType);
+    price = intl.format(selectedPizza.sizes[PizzaSize]);
   }
 
   // Fetching from the pizza API
@@ -29,11 +30,12 @@ export default function Order() {
     SetPizzaTypes(data);
 
     SetLoading(false);
+    SetPizzaType(data[0].id);
   }
 
   useEffect(() => {
-    (fetchPizzaTypes(), []);
-  });
+    fetchPizzaTypes();
+  }, []);
 
   return (
     <div className="order">
@@ -95,15 +97,19 @@ export default function Order() {
             </div>
           </div>
           <button type="submit">Add to Cart</button>
-          <p>$13.37</p>
+          <p>{price}</p>
         </div>
       </form>
       <div className="order-pizza">
-        <Pizza
-          name="Pepperoni"
-          description="Another Pizza"
-          image="/public/pizzas/pepperoni.webp"
-        />
+        {loading ? (
+          <h1>Loading</h1>
+        ) : (
+          <Pizza
+            name={selectedPizza.name}
+            description={selectedPizza.description}
+            image={selectedPizza.image}
+          />
+        )}
       </div>
     </div>
   );
