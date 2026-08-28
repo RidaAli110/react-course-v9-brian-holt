@@ -1,6 +1,8 @@
 {
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.1",
+    "@tanstack/router-devtools": "^1.167.1",
+    "@tanstack/router-plugin": "^1.168.35",
+    "@vitejs/plugin-react": "^6.1.1",
     "eslint": "^9.9.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.37.1",
@@ -17,6 +19,7 @@
     "type": "module"
   },
   "dependencies": {
+    "@tanstack/react-router": "^1.170.32",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   }

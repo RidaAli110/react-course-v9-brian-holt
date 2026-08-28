@@ -11,5 +11,6 @@ export default function Header() {
         🛒<span className="nav-cart-number">{cart.length}</span>
       </div>
     </nav>
+    
   );
 }
