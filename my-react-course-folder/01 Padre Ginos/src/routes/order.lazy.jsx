@@ -1,14 +1,19 @@
 import { useEffect, useState, useContext } from "react";
+import { createLazyFileRoute } from "@tanstack/react-router";
 import Pizza from "../Pizza";
 import Cart from "../Cart";
 import { CartContext } from "../Contexts";
+
+export const Route = createLazyFileRoute("/order")({
+  component: Order,
+});
 
 const intl = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
 
-export default function Order() {
+function Order() {
   //  This empty array state will hold the data from the fetched API
   const [PizzaTypes, SetPizzaTypes] = useState([]);
 
